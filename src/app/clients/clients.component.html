@@ -1,0 +1,111 @@
+<div class="container" id="addClientContainer">
+    <form class="navbar-form">
+        <div class="input-group no-border">
+          <input type="text" value="" class="form-control" placeholder="Search...">
+          <button type="submit" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">search</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </form>
+      <button type="button" class="btn btn-outline-primary radius-15" (click)="onOpenModel(clientEmpty,'add')">
+        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+      </button>  
+      <!-- add client form -->
+      <div class="modal fade" id="addClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add a Client</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addClientForm="ngForm" (ngSubmit)="onAddClient(addClientForm)">
+            <div class="modal-body">
+              <input type="text" class="form-control" ngModel name="firstName" id="" placeholder="First Name">
+              <input type="text" class="form-control" ngModel name="lastName" id="" placeholder="Last Name">
+              <input type="text" class="form-control" ngModel name="occupation" id="" placeholder="Occupation">
+              <input type="tel" class="form-control" ngModel name="phoneNumber" id="" placeholder="Phone Number">
+              <input type="number" class="form-control" ngModel name="documentNumber" id="" placeholder="Document Number">
+              <input type="email" class="form-control" ngModel name="email" id="" placeholder="Email">
+              <input type="date" class="form-control" ngModel name="dob" id="" placeholder="Date of Birth">
+              <input type="text" class="form-control" ngModel name="address" id="" placeholder="Home Address">
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" [disabled]="addClientForm.invalid" class="btn btn-primary">Save Client</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+        <!-- update client form -->
+        <div class="modal fade" id="updateClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Update Client</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form #updateClientForm="ngForm">
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" ngModel="{{updateClient?.id}}" name="id">
+                        <input type="hidden" class="form-control" ngModel="{{updateClient?.createdAt}}" name="createdAt">
+                      <input type="text" class="form-control" ngModel="{{updateClient?.firstName}}" name="firstName" id="" placeholder="firstName">
+                      <input type="text" class="form-control" ngModel="{{updateClient?.lastName}}" name="lastName" id="" placeholder="lastName">
+                      <input type="text" class="form-control" ngModel="{{updateClient?.occupation}}" name="occupation" id="" placeholder="Occupation">
+                      <input type="text" class="form-control" ngModel="{{updateClient?.address}}" name="address" id="" placeholder="address">
+                      <input type="tel" class="form-control" ngModel="{{updateClient?.phoneNumber}}" name="phoneNumber" id="" placeholder="phone">
+                      <input type="number" class="form-control" ngModel="{{updateClient?.documentNumber}}" name="documentNumber" id="" placeholder="Document Number">
+                      <input type="email" class="form-control" ngModel="{{updateClient?.email}}" name="email" id="" placeholder="email">
+                      <input type="hidden" class="form-control" ngModel="{{updateClient?.isActive}}" name="isActive" id="">
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal" id="updateFormClose">Close</button>
+                      <button type="submit" (click)="onUpdateClient(updateClientForm)" class="btn btn-primary">Save Client</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+    <div class="d-grid"> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Document Number</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+              <div *ngIf="clients==null"><div class="loader"></div></div>
+              
+                <tr *ngFor="let client of clients">
+                    <td>{{client.firstName}} {{client.lastName}}</td>
+                    <td>{{client.phoneNumber}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.documentNumber}}</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" class="btn btn-success" (click)="onOpenModel(client,'updateClient')">
+                            <span class="material-icons">visibility </span>
+                        </button> &nbsp;
+                        <button type="button" rel="tooltip" class="btn btn-danger" >
+                            <i class="fa fa-toggle-off" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  

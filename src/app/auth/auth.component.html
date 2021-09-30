@@ -1,0 +1,69 @@
+<div id="auth">
+  <span>Welcome
+    <a (click)="openForm('login')" style="cursor: pointer; color: aqua;">Login</a>
+</span>
+  <!-- Login form -->
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <div class="modal-body">
+                <div class="box">
+                     <div class="content">
+                        <div class="error"></div>
+                        <div class="form loginBox">
+                          
+                              <input type="text" class="form-control" ngModel name="userName" id="" placeholder="User Name" required>
+                              <input type="password" class="form-control" ngModel name="password" id="" placeholder="PassWord" required>
+                            
+                           
+                        </div>
+                     </div>
+                </div>
+                
+            </div>
+        <div class="modal-footer">
+            <button type="button"  class="btn btn-secondary" data-dismiss="modal" id="Lclosebtn" style="display: none;">Close</button>
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
+          <span>Forgot Password?
+            <a (click)="openForm('reset')" style="cursor: pointer; color: aqua;">Reset</a>
+       </span>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+    <!-- Reset form -->
+    <div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
+            </div>
+            <form #resetForm="ngForm" (ngSubmit)="resetPassword(resetForm)">
+                <div class="modal-body">
+                    <div class="box">
+                         <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                  <input type="email" class="form-control" ngModel name="email" id="" placeholder="Email" required>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Rclosebtn" style="display: none;">Close</button>
+              <button type="submit" [disabled]="resetForm.invalid" class="btn btn-primary">Reset</button>
+              <span>Remember your creds?
+                <a (click)="openForm('login')" style="cursor: pointer; color: aqua;">Login</a>
+           </span>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>

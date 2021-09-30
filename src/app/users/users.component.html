@@ -1,0 +1,122 @@
+<div class="container" id="addUserContainer">
+  <form class="navbar-form">
+      <div class="input-group no-border">
+        <input type="text" value="" class="form-control" placeholder="Search...">
+        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+          <i class="material-icons">search</i>
+          <div class="ripple-container"></div>
+        </button>
+      </div>
+    </form>
+    <button type="button" class="btn btn-outline-primary radius-15" (click)="onOpenModel(userEmpty,'add')">
+      <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+    </button>
+    
+    <!-- add user form -->
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form #addUserForm="ngForm" (ngSubmit)="onAddUser(addUserForm)">
+          <div class="modal-body">
+            <input type="text" class="form-control" ngModel name="firstName" id="" placeholder="firstName">
+            <input type="text" class="form-control" ngModel name="laststName" id="" placeholder="lastName">
+            <input type="text" class="form-control" ngModel name="userName" id="" placeholder="userName">
+            <input type="hidden" class="form-control" value="system" ngModel name="otherName" id="" placeholder="otherName">
+            <input type="tel" class="form-control" ngModel name="phone" id="" placeholder="phone">
+            <input type="number" class="form-control" ngModel name="documentNumber" id="" placeholder="Document Number">
+            <input type="email" class="form-control" ngModel name="email" id="" placeholder="email">
+            <select class="form-control" ngModel name="roleId" id=""><option value="1"></option><option value="">Admin</option><option value="2">SuperAdmin</option></select>
+            <select class="form-control" ngModel name="isActive" id=""><option value=""></option><option value="t">Active</option><option value="f">Inactive</option></select>
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" [disabled]="addUserForm.invalid" class="btn btn-primary">Save User</button>
+          </div>
+      </form>
+        </div>
+      </div>
+    </div>
+      <!-- update user form -->
+      <div class="modal fade" id="updateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form #updateUserForm="ngForm">
+                  <div class="modal-body">
+                      <input type="hidden" class="form-control" ngModel="{{updateUser?.id}}" name="id">
+                      <input type="hidden" class="form-control" ngModel="{{updateUser?.createdAt}}" name="createdAt">
+                    <input type="text" class="form-control" ngModel="{{updateUser?.firstName}}" name="firstName" id="" placeholder="firstName">
+                    <input type="text" class="form-control" ngModel="{{updateUser?.lastName}}" name="lastName" id="" placeholder="lastName">
+                    <input type="text" class="form-control" ngModel="{{updateUser?.userName}}" name="userName" id="" placeholder="userName">
+                    <input type="hidden" class="form-control" value="system" ngModel="{{updateUser?.otherName}}" name="otherName" id="" placeholder="otherName">
+                    <input type="tel" class="form-control" ngModel="{{updateUser?.phone}}" name="phone" id="" placeholder="phone">
+                    <input type="number" class="form-control" ngModel="{{updateUser?.documentNumber}}" name="documentNumber" id="" placeholder="Document Number">
+                    <input type="email" class="form-control" ngModel="{{updateUser?.email}}" name="email" id="" placeholder="email">
+                    <select class="form-control" ngModel="{{updateUser?.roleId}}" name="roleId" id=""><option value=""></option><option value=1>Admin</option><option value=2>SuperAdmin</option></select>
+                    <input type="hidden" class="form-control" ngModel="{{updateUser?.isActive}}" name="isActive" id="">
+                  
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal" id="updateFormClose">Close</button>
+                    <button type="submit" (click)="onUpdateUser(updateUserForm)" class="btn btn-primary">Save User</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+          <!-- toggle user form -->
+    <div class="modal fade" id="toggleUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Toggle User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <p>Change Accont Status</p>
+            <select class="form-control" name="isActive" id=""><option value="">ACTIVE</option><option value="">INACTIVE</option></select>
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+  <div class="col" *ngFor="let user of users">
+      <div class="card radius-15">
+          <div class="card-body text-center">
+              <div class="p-4 border radius-15">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="110" height="110" class="rounded-circle shadow" alt="">
+                  <h5 class="mb-0 mt-5">{{user.firstName}} {{user.lastName}}</h5>
+                  <p class="mb-3">{{user.email}}</p>
+      
+                  <div class="d-grid"> <button type="button" class="btn btn-outline-primary radius-15" data-original-title="update" (click)="onOpenModel(user,'updateUser')"><i class="fa fa-pencil" style="color: #58e71f;" aria-hidden="true">Update</i></button>
+                      <button type="button" class="btn btn-outline-primary radius-15" data-original-title="toggle" (click)="onOpenModel(user,'toggleUser')"><i class="fa fa-toggle-off" aria-hidden="true"></i></button>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
