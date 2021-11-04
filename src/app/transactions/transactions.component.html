@@ -1,0 +1,100 @@
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <span class="material-icons">
+                  attach_money
+                  </span>
+              </div>
+              <p class="card-category">Disbursement Today <b>{{data.disbursementToday}}</b></p>
+              <h3 class="card-title">KSH {{data.amountDisbursedToday}}
+              </h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">date_range</i> Last 24 Hours
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">store</i>
+              </div>
+              <p class="card-category">Collections Today <b>{{data.collectionToday}}</b></p>
+              <h3 class="card-title">Ksh {{data.amountCollectedToday}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">date_range</i> Last 24 Hours
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">Defaults</i>
+              </div>
+              <p class="card-category">Total Detaults</p>
+              <h3 class="card-title">{{data.totalDefaults}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">local_offer</i> Authorised for collection
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">Leads</i>
+              </div>
+              <p class="card-category">Leads</p>
+              <h3 class="card-title">{{data.totalLeads}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">update</i> New Leads
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">New Applications</h4>
+              <p class="card-category">Loan application Today</p>
+            </div>
+            <div class="card-body table-responsive">
+              <table  class="table table-hover">
+                <thead class="text-secondary">
+                  <th>Mobile Number</th>
+                  <th>Product Code</th>
+                  <th>loanAmount</th>
+                  <th>Status</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let application of data.applicationsToday">
+                    <td>{{application.customerMobileNumber}}</td>
+                    <td>{{application.productCode}}</td>
+                    <td>KSH {{application.loanAmount}}</td>
+                    <td>{{application.applicationStatus}}</td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

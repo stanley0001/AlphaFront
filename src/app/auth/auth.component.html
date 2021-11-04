@@ -7,10 +7,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Alpha Login</h5>
         </div>
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             <div class="modal-body">
+              <div *ngIf="authMessage" class="alert alert-danger" role="alert"> 
+                {{authMessage}}
+              </div>
                 <div class="box">
                      <div class="content">
                         <div class="error"></div>
@@ -41,15 +44,19 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Alpha Password Reset</h5>
             </div>
             <form #resetForm="ngForm" (ngSubmit)="resetPassword(resetForm)">
                 <div class="modal-body">
+                  <div *ngIf="authMessage" class="alert alert-info" role="alert">
+                    {{authMessage}}
+                  </div>
                     <div class="box">
                          <div class="content">
                             <div class="error"></div>
                             <div class="form loginBox">
                                   <input type="email" class="form-control" ngModel name="email" id="" placeholder="Email" required>
+                                  <input type="hidden" class="form-control" ngModel="Forgot Password" name="reason" id="" placeholder="Email" required>
                             </div>
                          </div>
                     </div>

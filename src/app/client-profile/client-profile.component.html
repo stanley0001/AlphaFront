@@ -1,0 +1,285 @@
+<div class="d-grid" id="d-grid">
+  <div class="card card-nav-tabs card-plain">
+    <div class="card-header card-header-primary">
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#bioData" data-toggle="tab">Clients Bio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#transactions" data-toggle="tab">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#communication" data-toggle="tab">Client Communication</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#actions" data-toggle="tab">Actions</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </div><div class="card-body ">
+        <div class="tab-content text-center">
+            <div class="tab-pane active" id="bioData">
+              <div class="card-body">
+                <h2>Client Information</h2>
+              
+                  <div class="table-responsive">
+                    <table class="table table-shopping">
+                        <thead>
+                            <tr>
+                                <th colspan="4"></th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                  <label for="name"> Name:</label> {{profile.client.firstName}}
+                                  {{profile.client.lastName}}
+                                </td>
+                                <td >
+                                  <label for="documentnumber">Document Number:</label>  {{profile.client.documentNumber}}
+                                </td>
+                                <td>
+                                  <label for="phoneNumber">PhoneN umber:</label> {{profile.client.phoneNumber}}
+                                </td>
+                                <td>
+                                  <label for="externalId">ExternalId:</label> {{profile.client.externalId}}
+                                </td>
+                               
+                               
+                            </tr>
+                            
+                            <tr>
+                              <td>
+                                <label for="dob">Date Of Birth:</label> {{profile.client.dob}} 
+                              </td>
+                              <td>
+                                <label for="occupation">Occupation:</label>{{profile.client.occupation}} 
+                              </td>
+                              <td >
+                                <label for="status">Statu:</label>{{profile.client.status}} 
+                              </td>
+                              <td>
+                                <label for="altPhoneNumber">Altanative PhoneNumber:</label>{{profile.client.altPhoneNumber}}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td> <label for="email">Email:</label>{{profile.client.email}} </td>
+                              <td colspan="3">
+                                <label for="address">Home Address:</label>{{profile.client.address}}
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                  <div *ngIf="profile.subscriptions">
+                    <h2>Subscriptions</h2>
+                    <div class="table-responsive">
+                      <table class="table table-shopping">
+                          <thead>
+                              <tr>
+                                  <th>Product Code</th>
+                                  <th class="th-description">Intrest Rate %</th>
+                                  <th class="th-description">Term</th>
+                                  <th class="th-description">Time span</th>
+                                  <th class="text-right">Credit Limit</th>
+                                  <th class="text-right">Status</th>
+                                  <th class="text-right">Subscription Date</th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let subscription of profile.subscriptions">
+                                  <td>
+                                    {{subscription.productCode }}
+                                  </td>
+                                  <td class="td-name">
+                                    {{subscription.interestRate }}
+                                  </td>
+                                  <td>
+                                    {{subscription.term }}
+                                  </td>
+                                  <td>
+                                    {{subscription.timeSpan }}
+                                  </td>
+                                  <td class="td-number">
+                                    {{subscription.creditLimit }}
+                                  </td>
+                                  <td class="td-number">
+                                    {{subscription.status }} 
+                                  </td>
+                                  <td class="td-number">
+                                    {{subscription.createdAt }}
+                                  </td>
+                                  
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+              </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Update Info</button>
+                   
+              <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-row">
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="First name">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Last name">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Other name">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Id number">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Phone Number">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Email Address">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="tab-pane" id="transactions">
+              <div class="modal fade transactionM" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" style="background-color: aliceblue;">
+                              <div class="modal-content" style="background: transparent;">
+                                  <table class="mb-3">
+                                    <tr>
+                                      <th>TransactionsTime</th>
+                                      <th>TransactionsType</th>
+                                      <th>Refetence Number</th>
+                                      <th>Amount</th>
+                                      <th>Initial Balance</th>
+                                   <th>Final Balance</th>
+                                  </tr>
+                                   <tr  *ngFor="let transaction of CurrentTransactions">
+                                    <td>{{transaction.transactionTime}}</td>
+                                    <td>{{transaction.transactionType}}</td>
+                                    <td>{{transaction.otherRef}}</td>
+                                    <td> {{transaction.amount}}</td>
+                                    <td>Ksh {{transaction.initialBalance}}</td>
+                                    <td>Ksh {{transaction.finalBalance}}</td>
+                                   </tr>
+                                  </table>
+                              </div>
+                            </div>
+                          </div>
+              <table id="transactionTable" class="table">
+                <thead>
+                        <tr>
+                            <th>LoanNumber Amount</th>
+                            <th>Balance</th>
+                            <th>Start Date</th>
+                            <th>Status</th>
+                            <th>Due date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let account of loanAccounts" id="exampleAccordion" data-children=".item">
+                         
+                              <td>
+                                <a (click)="onOpenModel(account.transactions,'.transactionM')" style="color: aqua; cursor: pointer;">{{account.account.loanref}}
+                                </a>  Ksh {{account.account.payableAmount}}
+                              </td>
+                                 <td>Ksh {{account.account.accountBalance}}</td>
+                                 <td>{{account.account.startDate}}</td>
+                                 <td>{{account.account.status}}</td>
+                                  <td>{{account.account.dueDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="communication">
+              <table class="table">
+                <div *ngIf="profile">
+                  <thead>
+                    <tr>
+                        <th>Receipient</th>
+                        <th>messageType</th>
+                        <th>Message</th>
+                        <th>Derivary Time</th>
+                        <th class="text-right">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let email of profile.communications">
+                    <td>{{email.recipient}}</td>
+                    <td>{{email.messageType}}</td>
+                    <td>{{email.message}}</td>
+                    <td>{{email.date}}</td>
+                    <td>{{email.status}}</td>
+                   </tr>
+                  </tbody>
+                 </div>
+            </table>
+            </div>
+            <div class="tab-pane" id="actions">
+              <div id="subscription"></div>
+              <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                  <h4>Choose a product</h4>
+                  <select class="form-control form-control-lg" style="cursor: pointer;">
+                    <option  *ngFor="let product of products"  (click)="onChange(product.name,product.id,'#subscribe')">name:{{product.name}} min:{{product.minLimit}} max:{{product.maxLimit}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal fade" id="subscribe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Subscription Confirmation</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Subscribe <b>{{profile.client.firstName}}
+                      {{profile.client.lastName}}</b> of phone: 
+                      <b>{{profile.client.phoneNumber}}</b> and Id: 
+                    <b>{{profile.client.documentNumber}}</b> to <b>{{productName}}</b></p>
+                    <form  #subscriptionForm="ngForm">
+                      <input type="hidden" ngModel="{{profile.client.phoneNumber}}" name="phone">
+                      <input type="hidden" ngModel="{{productId}}" name="productId">
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" (click)="subscribeP(subscriptionForm)">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            
+             
+            </div>
+        </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+    

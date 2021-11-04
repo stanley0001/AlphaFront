@@ -1,9 +1,12 @@
+import { reset } from './auth/reset';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Auth } from './auth';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { ResponseModel } from './auth/ResponseModel';
 
 export class User{
   constructor(
@@ -33,21 +36,24 @@ export class AuthService {
      }
        
      authenticate(logins:Auth) {
+       this.logOut();
       const username=logins.userName;
       const password=logins.password;
-      sessionStorage.setItem('username',username)
       sessionStorage.setItem('nothing',password)
-      return this.httpClient.post<any>(`${this.ApiUrl}/authenticate`,logins);
-
+       let response=this.httpClient.post<any>(`${this.ApiUrl}/authenticate`,logins);
+       
+       return response;
         }
-        resetPassword(remail:string) {
-          const email=remail;
-          return this.httpClient.post<any>(`${this.ApiUrl}/reset`,email);
+        resetPassword(remail:reset) : Observable<ResponseModel>{
+          this.logOut();
+          return this.httpClient.post<ResponseModel>(`${this.ApiUrl}/users/resetPassword`,remail);
+          
     
             }
         isUserLoggedIn() {
           let token = sessionStorage.getItem('backendToken')
           let user = sessionStorage.getItem('username')
+          //let authUser = sessionStorage.getItem('authUser')
           if (user && token) {
             return true;
           }else{

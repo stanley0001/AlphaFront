@@ -1,3 +1,5 @@
+import { authResponse } from './authResponse';
+import { reset } from './reset';
 import { AuthService, JwtResponse } from './../auth.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
@@ -12,7 +14,8 @@ import { ResponseModel } from './ResponseModel';
 })
 export class AuthComponent implements OnInit {
   model: any = {};
-
+  Reset!: reset;
+  authMessage!: String;
   constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -24,34 +27,47 @@ export class AuthComponent implements OnInit {
   }
 
   login(logins:NgForm):void {
+    this.resetAuthMessage;
     this.authservice.authenticate(logins.value).subscribe(
-      (response:ResponseModel)=>{ 
-        sessionStorage.setItem('backendToken',response.message)
+      (response:authResponse)=>{ 
+        if (response.reason==="Authenticated") {
+        document.getElementById('Lclosebtn')?.click();
+        sessionStorage.setItem('username',response.user.username)
+        response.user.authorities.forEach(auth => {
+          sessionStorage.setItem('authority',auth.authority)
+        });
+        
+        let receivedToken='Bearer '+response.message;
+        sessionStorage.setItem('backendToken',receivedToken);
         if (this.authservice.isUserLoggedIn()) {
-          this.router.navigate(['dash'])
+          this.router.navigate(['admin/dash'])
         }else{
           alert("please login")
         }
-      
-       
+      }else{
+        this.authMessage=response.reason;
+      }
       },
       (error:HttpErrorResponse)=>{
+        if (error.status===401) {
+          this.authMessage="Wrong PassWord!";
+        }else{
         alert(error.error.error)
+        }
       }
     );
+    
       
   }
+  resetAuthMessage():void{
+    this.authMessage!;
+  }
  resetPassword(logins:NgForm):void {
-  this.authservice.resetPassword(logins.value.email).subscribe(
+   this.resetAuthMessage;
+   this.Reset=logins.value;
+  this.authservice.resetPassword(this.Reset).subscribe(
     (response:ResponseModel)=>{ 
-      if (response.httpCode===200) {
-        alert("Reset link have been sent")
-        this.router.navigate(['auth'])
-      }else{
-        alert("Error occured")
-      }
-    
-     
+      this.authMessage=response.message;
     },
     (error:HttpErrorResponse)=>{
       alert(error.error.error)

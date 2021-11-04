@@ -1,4 +1,5 @@
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,18 +14,43 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { ProductsComponent } from './products/products.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { IntercepterService } from './intercepter.service';
 import { AuthGurdService as AuthGuard } from './auth-gurd.service'; 
+import { LoggedInGuardService as loginGuard} from './loggedin-gurd.service';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { BioDataComponent } from './bio-data/bio-data.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 const routes: Routes = [
   {
-    path: 'dash',
+    path: 'admin',
     component: DashComponent,
   children: [
-    
+    {
+      path: 'dash',
+      component: TransactionsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'clientProfile',
+      component: ClientProfileComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'ClientTransactions',
+      component: TransactionsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'adminActions',
+      component: ClientProfileComponent,
+      canActivate: [AuthGuard]
+    },
     {
       path: 'clients',
       component: ClientsComponent,
+      children: [
+       
+      ],
       canActivate: [AuthGuard]
     },
     {
@@ -55,7 +81,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: CommunicationComponent
+    component: TransactionsComponent
   },
   
   ],
@@ -63,7 +89,8 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthComponent
+    component: AuthComponent,
+    canActivate: [loginGuard]
   },
   {
     path: '**',
@@ -81,7 +108,10 @@ const routes: Routes = [
     ProductsComponent,
     ReportsComponent,
     CommunicationComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ClientProfileComponent,
+    BioDataComponent,
+    TransactionsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -89,7 +119,7 @@ const routes: Routes = [
     HttpClientModule, FormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

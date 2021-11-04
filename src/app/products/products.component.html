@@ -17,33 +17,63 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
+              <div class="nav-tabs-navigation">
               <h5 class="modal-title" id="exampleModalLongTitle">Add a Product</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
-            <form #addProductForm="ngForm" (ngSubmit)="onAddProduct(addProductForm)">
-            <div class="modal-body">
-               
-               
-                 Name<input type="text" class="form-control"  name="name" id="" placeholder="name">
-                Code<input type="text" class="form-control"  name="code" id="" placeholder="code">
-                TransactionType<input type="text" class="form-control"  name="transactionType" id="" placeholder="transactionType">
-              Term in Days<input type="number" class="form-control"  name="term" id="" placeholder="term">
-              <input type="hidden" class="form-control"  name="timeSpan" id="" placeholder="timeSpan">
-              Interest %<input type="number" class="form-control"  name="interest" id="" placeholder="interest">
-              MaxLimit<input type="number" class="form-control"  name="maxLimit" id="" placeholder="maxLimit">
-              MinLimit<input type="number" class="form-control"  name="minLimit" id="" placeholder="minLimit">
-              Active(status)
-              <input type="radio"  name="active" value=true>Yes
-              <input type="radio"   name="active" value=false>No
+            <div class="card-header" role="tab" id="headingOne">
+              <a data-toggle="collapse" data-parent="#accordion" href="#productinfo" aria-expanded="true" aria-controls="collapseOne">
+                Product Info
+              </a>
+          </div>
+          <div class="card-header" role="tab" id="headingTwo">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Default Charge
+                </a>
+            </div>
+        </div>
+        <div class="card-body ">
+          <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
             
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" [disabled]="addProductForm.invalid" class="btn btn-primary">Save Product</button>
-            </div>
-        </form>
+              
+                  <form #addProductForm="ngForm" (ngSubmit)="onAddProduct(addProductForm)" id="bioData">
+                    <div id="productinfo" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="modal-body">
+                         Product Name<input type="text" class="form-control"  name="name" id="" placeholder="name">
+                        Code<input type="text" class="form-control"  name="code" id="" placeholder="code">
+                        TransactionType<input type="text" class="form-control"  name="transactionType" id="" placeholder="transactionType">
+                        Term in Days<input type="number" class="form-control"  name="term" id="" placeholder="term">
+                      <input type="hidden" class="form-control"  name="timeSpan" id="" placeholder="timeSpan">
+                      Interest %<input type="number" class="form-control"  name="interest" id="" placeholder="interest">
+                      MaxLimit<input type="number" class="form-control"  name="maxLimit" id="" placeholder="maxLimit">
+                      MinLimit<input type="number" class="form-control"  name="minLimit" id="" placeholder="minLimit">
+                      Active(status)
+                      <input type="radio"  name="active" value=true>Yes
+                      <input type="radio"   name="active" value=false>No
+                    </div>
+                  </div>
+                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-body">
+                      Charge Name<input type="text" class="form-control"  name="cname" value="DEFAULT_PENALTY" placeholder="Charge name" readonly>
+                      Days after Default<input type="text" class="form-control"  name="dac" value=0 placeholder="Days">
+                      Rate in % <input type="number" class="form-control"  name="rate" value=0 placeholder="Rate" required>
+                      Interval<input type="number" class="form-control"  name="interval" value=1 placeholder="Interval">
+                      <select class="form-control form-control-lg" name="intervalUnit" id="unit">
+                        <option value="HOURS">HOURS</option>
+                        <option value="DAYS" selected>DAYS</option>
+                        <option value="MONTHS">MONTHS</option>
+                        <option value="YEARS"YEARS></option>
+                      </select>
+                    
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" [disabled]="addProductForm.invalid" class="btn btn-primary">Save Product</button>
+                  </div>
+                </form>
+              
+            
+          </div>
           </div>
         </div>
       </div>

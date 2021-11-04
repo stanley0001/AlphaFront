@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -22,7 +23,7 @@ export class ClientsComponent implements OnInit {
      public subscribeClient!:Client;
      public products!: Product[];
   
-    constructor(private clientService:ClientService,private userService:UsersService,private productService:ProductService) { }
+    constructor(private clientService:ClientService,private userService:UsersService,private productService:ProductService,private router:Router) { }
   
     ngOnInit() {
       this.getClients();
@@ -103,6 +104,11 @@ export class ClientsComponent implements OnInit {
       );
       
      }
+     public viewClient(client1:Client,mode:string):void{
+      this.router.navigate(['admin/clientProfile'],{ queryParams: { id: client1.id } })
+        
+     }
+
  
   public onOpenModel(client1:Client,mode:string):void{
     

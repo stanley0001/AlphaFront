@@ -30,6 +30,8 @@ export class UsersService {
    public updateUser(user:User): Observable<User>{
     return this.http.post<User>(`${this.ApiUrl}/users/update`,user);
   }
+  
+  
 /*
    //toggle a user
    public toggleUser(phone:string,status:boolean): void{

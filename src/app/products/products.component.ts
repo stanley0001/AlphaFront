@@ -1,3 +1,4 @@
+import { ModifiedProduct } from './modifiedProduct';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -16,8 +17,11 @@ export class ProductsComponent implements OnInit {
   title="Products";
      public Products!: Product[];
      public ProductEmpty!: Product;
+     public modifiedProducts!: ModifiedProduct[];
+     public modifiedProductEmpty!: ModifiedProduct;
      public user!: User;
      public updateProduct!:Product;
+     public modifiedUpdateProduct!:ModifiedProduct;
   
     constructor(private ProductService:ProductService,private userService:UsersService) { }
   

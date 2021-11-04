@@ -12,43 +12,43 @@
     <div class="sidebar-wrapper">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['dash/']">
+          <a class="nav-link" [routerLink]="['admin/dash']">
             <i class="fa fa-tachometer" aria-hidden="true"></i>
             <p>Dashboard</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/users']">
+          <a class="nav-link" [routerLink]="['/admin/users']">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <p>Users</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/clients']">
+          <a class="nav-link" [routerLink]="['/admin/clients']">
             <i class="fa fa-users" aria-hidden="true"></i>
             <p>Clients</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/bps']">
+          <a class="nav-link" [routerLink]="['/admin/bps']">
             <i class="fa fa-handshake-o" aria-hidden="true"></i>
             <p>BPS</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/products']">
+          <a class="nav-link" [routerLink]="['/admin/products']">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
             <p>products</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/reports']">
+          <a class="nav-link" [routerLink]="['/admin/reports']">
             <i class="fa fa-area-chart" aria-hidden="true"></i>
             <p>Reports</p>
           </a>
         </li>
         <li routerLinkActive="nav-item active">
-          <a class="nav-link" [routerLink]="['/dash/communication']">
+          <a class="nav-link" [routerLink]="['/admin/communication']">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
             <p>Commmunication</p>
           </a>
@@ -57,11 +57,10 @@
     </div>
   </div>
   <div class="main-panel">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
       <div class="container-fluid">
         <div class="navbar-wrapper">
-          <a class="navbar-brand" href="javascript:;">Dashboard</a>
+          <a class="navbar-brand" style="cursor: pointer;">Dashboard</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -85,19 +84,16 @@
                 </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Profile</a>
                 <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Log out</a>
               </div>
             </li>
-            <!-- your navbar here -->
           </ul>
         </div>
       </div>
     </nav>
-    <!-- End Navbar -->
     <div class="content">
       <div class="container-fluid">
-        <!-- body-->
     <router-outlet>
      
     </router-outlet>
@@ -118,7 +114,6 @@
             document.write(new Date().getFullYear())
           </script>
         </div>
-        <!--footer section-->
       </div>
     </footer>
   </div>
