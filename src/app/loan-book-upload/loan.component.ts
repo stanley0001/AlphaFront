@@ -14,16 +14,6 @@ export class LoanBookComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
-
-
-
-
-
-
-
-
   uploadListener($event: any): void {
 
   let text = [];
