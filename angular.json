@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "alphaFront2"
+  "defaultProject": "alphaFront2",
+  "cli": {
+    "analytics": "1f3978ce-65d1-40e8-b3ca-265c4cd45a54"
+  }
 }

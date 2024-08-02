@@ -19,6 +19,7 @@ import { LoggedInGuardService as loginGuard} from './loggedin-gurd.service';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { BioDataComponent } from './bio-data/bio-data.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { LoanBookComponent } from './loan-book-upload/loan.component';
 
 const routes: Routes = [
   {
@@ -58,11 +59,16 @@ const routes: Routes = [
       component: UsersComponent,
       canActivate: [AuthGuard]
     },
-  {
-    path: 'bps',
-    component: BpsComponent,
-    canActivate: [AuthGuard]
-  },
+    {
+      path: 'bps',
+      component: BpsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'loan-book-upload',
+      component: LoanBookComponent,
+      canActivate: [AuthGuard]
+    },
   {
     path: 'reports',
     component: ReportsComponent,
@@ -111,7 +117,8 @@ const routes: Routes = [
     NotfoundComponent,
     ClientProfileComponent,
     BioDataComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    LoanBookComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
