@@ -8,6 +8,7 @@ import { ClientsCsvData } from './LoanCsvData';
 })
 export class LoanBookComponent implements OnInit {
   public records: any[] = [];
+  page = 1;
   @ViewChild('csvReader') csvReader: any;
   jsondatadisplay:any;
   constructor() { }

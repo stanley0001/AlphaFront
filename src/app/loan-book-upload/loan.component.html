@@ -29,8 +29,8 @@
               </tr>
           </thead>
           <tbody>
-              
-          <tr *ngFor="let record of records;let i = index;">
+          <tr *ngFor="let record of records | paginate: { itemsPerPage: 10, currentPage: page }">
+          <!-- <tr *ngFor="let record of records;let i = index;"> -->
               <th scope="row">{{record.customerName}}</th>
               <td>{{record.documentNumber}}</td>
               <td>{{record.phoneNumber}}</td>
@@ -47,6 +47,7 @@
          
           </tbody>
         </table>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
        
         <a href="javascript:;" *ngIf="records.length > 0" (click)="getJsonData()" class="btn btn-primary">Upload</a>
       
