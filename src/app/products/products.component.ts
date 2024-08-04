@@ -15,12 +15,12 @@ import { UsersService } from '../users.service';
 export class ProductsComponent implements OnInit {
 
   title="Products";
-     public Products!: Product[];
+     public products!: Product[];
      public ProductEmpty!: Product;
      public modifiedProducts!: ModifiedProduct[];
      public modifiedProductEmpty!: ModifiedProduct;
      public user!: User;
-     public updateProduct!:Product;
+     public updateProduct:Product | undefined;
      public modifiedUpdateProduct!:ModifiedProduct;
   
     constructor(private ProductService:ProductService,private userService:UsersService) { }
@@ -32,7 +32,8 @@ export class ProductsComponent implements OnInit {
     public getProducts():void{
       this.ProductService.getProducts().subscribe(
           (response:Product[])=>{
-           this.Products=response;
+           this.products=response;
+           console.log("this.products",this.products)
           },
           (error :HttpErrorResponse)=>{
            alert(error.message);

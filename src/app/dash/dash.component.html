@@ -11,49 +11,49 @@
     </div>
     <div class="sidebar-wrapper">
       <ul class="nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="allowed('ADMIN')">
           <a class="nav-link" [routerLink]="['admin/dash']">
             <i class="fa fa-tachometer" aria-hidden="true"></i>
             <p>Dashboard</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('canViewUsers')">
           <a class="nav-link" [routerLink]="['/admin/users']">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <p>Users</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li class="nav-item" routerLinkActive="nav-item active" *ngIf="allowed('canViewClients')">
           <a class="nav-link" [routerLink]="['/admin/clients']">
             <i class="fa fa-users" aria-hidden="true"></i>
             <p>Clients</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('canViewBps')">
           <a class="nav-link" [routerLink]="['/admin/bps']">
             <i class="fa fa-handshake-o" aria-hidden="true"></i>
             <p>BPS</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('VIEW_CUSTOM_LOAN_BOOK_UPLOAD')">
           <a class="nav-link" [routerLink]="['/admin/loan-book-upload']">
             <i class="fa fa-handshake-o" aria-hidden="true"></i>
             <p>Uplaod Loan Book</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('canViewProducts')">
           <a class="nav-link" [routerLink]="['/admin/products']">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
             <p>products</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('canViewReports')">
           <a class="nav-link" [routerLink]="['/admin/reports']">
             <i class="fa fa-area-chart" aria-hidden="true"></i>
             <p>Reports</p>
           </a>
         </li>
-        <li routerLinkActive="nav-item active">
+        <li routerLinkActive="nav-item active" *ngIf="allowed('canViewCommunication')">
           <a class="nav-link" [routerLink]="['/admin/communication']">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
             <p>Commmunication</p>

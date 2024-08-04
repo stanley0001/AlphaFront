@@ -26,26 +26,31 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashComponent,
+    data: { permission: 'ADMIN' },
   children: [
     {
       path: 'dash',
       component: TransactionsComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'ADMIN' },
     },
     {
       path: 'clientProfile',
       component: ClientProfileComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'canViewClientProfile' }
     },
     {
       path: 'ClientTransactions',
       component: TransactionsComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'ADMIN' }
     },
     {
       path: 'adminActions',
       component: ClientProfileComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'canViewAdminActions' }
     },
     {
       path: 'clients',
@@ -53,42 +58,50 @@ const routes: Routes = [
       children: [
        
       ],
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'canViewClients' }
     },
     {
       path: 'users',
       component: UsersComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'canViewUsers' }
     },
     {
       path: 'bps',
       component: BpsComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'canViewBps' }
     },
     {
       path: 'loan-book-upload',
       component: LoanBookComponent,
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      data: { permission: 'VIEW_CUSTOM_LOAN_BOOK_UPLOAD' }
     },
   {
     path: 'reports',
     component: ReportsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { permission: 'canViewReports' }
   },
   
   {
     path: 'products',
   component: ProductsComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AuthGuard],
+  data: { permission: 'canViewProducts' }
   },
   {
     path: 'communication',
     component: CommunicationComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { permission: 'canViewCommunication' }
   },
   {
     path: '**',
-    component: TransactionsComponent
+    component: TransactionsComponent,
+    data: { permission: 'ADMIN' }
   },
   
   ],

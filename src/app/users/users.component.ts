@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { UsersService } from '../users.service';
+import { Role } from '../role';
 
 @Component({
   selector: 'app-users',
@@ -11,9 +12,10 @@ import { UsersService } from '../users.service';
 })
 export class UsersComponent implements OnInit {
     title="Users";
-     public users:User[] | undefined;
-     public userEmpty!: User;
-     public updateUser!:User;
+    public users:User[] | undefined;
+    public roles:Role[] | undefined;
+    public userEmpty!: User;
+     public updateUser:User | undefined;
   
     constructor(private UsersService:UsersService) { }
   
@@ -25,6 +27,17 @@ export class UsersComponent implements OnInit {
       this.UsersService.getUsers().subscribe(
           (response:User[])=>{
            this.users=response;
+          },
+          (error :HttpErrorResponse)=>{
+           alert(error.message);
+           
+          }
+      );
+    }
+    public allRoles():void{
+      this.UsersService.getRoles().subscribe(
+          (response:Role[])=>{
+           this.roles=response;
           },
           (error :HttpErrorResponse)=>{
            alert(error.message);
@@ -81,7 +94,6 @@ export class UsersComponent implements OnInit {
       button.setAttribute('data-target','#addUser');
     }
     if(mode==='updateUser'){
-      
       this.updateUser=user;
       button.setAttribute('data-target','#updateUser');
     }
@@ -91,8 +103,8 @@ export class UsersComponent implements OnInit {
     
     container?.appendChild(button);
     button.click();
-    
+    this.allRoles();
   }
-  
+    
   }
   

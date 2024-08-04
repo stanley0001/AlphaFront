@@ -5,23 +5,23 @@ import { User } from './user';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import { Auth } from './auth';
+import { Role } from './role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
  
-
   private ApiUrl=environment.apiBaseUrl;
   constructor(private http:HttpClient) { }
 
   //get all users
   public getUsers(): Observable<User[]> {
-   
-    
      return this.http.get<User[]>(`${this.ApiUrl}/users/all`);
   }
-  
+  getRoles():Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.ApiUrl}/users/security/roles`);
+   }
   //add a user
   public addUser(user:User): Observable<User[]>{
     return this.http.post<User[]>(`${this.ApiUrl}/users/create`,user);

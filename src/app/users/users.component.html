@@ -31,8 +31,15 @@
             <input type="tel" class="form-control" ngModel name="phone" id="" placeholder="phone">
             <input type="number" class="form-control" ngModel name="documentNumber" id="" placeholder="Document Number">
             <input type="email" class="form-control" ngModel name="email" id="" placeholder="email">
-            <select class="form-control" ngModel name="roleId" id=""><option value="1"></option><option value="">Admin</option><option value="2">SuperAdmin</option></select>
-            <select class="form-control" ngModel name="isActive" id=""><option value=""></option><option value="t">Active</option><option value="f">Inactive</option></select>
+            <select class="form-control" ngModel name="roleId" id="">
+              <option value="">Role</option>
+              <option *ngFor="let role of roles" [value]="role.roleId">{{role.roleName}}</option>
+              <!-- <option value="">Admin</option><option value="2">SuperAdmin</option> -->
+              </select>
+            <select class="form-control" ngModel name="isActive" id="">
+              <option value="">Status</option><option value="t">Active</option>
+              <option value="f">Inactive</option>
+            </select>
           
           </div>
           <div class="modal-footer">
@@ -64,7 +71,10 @@
                     <input type="tel" class="form-control" ngModel="{{updateUser?.phone}}" name="phone" id="" placeholder="phone">
                     <input type="number" class="form-control" ngModel="{{updateUser?.documentNumber}}" name="documentNumber" id="" placeholder="Document Number">
                     <input type="email" class="form-control" ngModel="{{updateUser?.email}}" name="email" id="" placeholder="email">
-                    <select class="form-control" ngModel="{{updateUser?.roleId}}" name="roleId" id=""><option value=""></option><option value=1>Admin</option><option value=2>SuperAdmin</option></select>
+                    <select class="form-control" ngModel="{{updateUser?.roleId}}" name="roleId" id="">
+                      <option value="">Role</option>
+                      <option *ngFor="let role of roles" [value]="role.roleId">{{role.roleName}}</option>
+                    </select>
                     <input type="hidden" class="form-control" ngModel="{{updateUser?.isActive}}" name="isActive" id="">
                   
                   </div>

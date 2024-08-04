@@ -12,6 +12,8 @@ import { ResponseModel } from './responseModel';
 export class LoanBookComponent implements OnInit {
   public records: any[] = [];
   page = 1;
+  itemsPerPage = 10;
+  pageSizes = [5, 10, 20, 50, 100];
   jsondatadisplay:any;
   @ViewChild('csvReader') csvReader: any;
   constructor(private restClient:ProductService) { 
@@ -97,6 +99,12 @@ fileReset() {
 
 getJsonData(){
   this.jsondatadisplay = JSON.stringify(this.records);
+}
+onPageSizeChange(event: Event) {
+  const selectedValue = (event.target as HTMLSelectElement).value;
+
+  console.log("selected page size ",selectedValue)
+  this.itemsPerPage = Number.parseInt(selectedValue); 
 }
 uploadLoanBook(){
   // console.log(this.records);

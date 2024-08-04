@@ -34,13 +34,19 @@ export class AuthComponent implements OnInit {
         document.getElementById('Lclosebtn')?.click();
         
         // sessionStorage.setItem('username',response.user.username)
-        sessionStorage.setItem('username',"admin")
-        sessionStorage.setItem('authority',"ADMIN")
-        sessionStorage.setItem('authorities',"ADMIN")
         // response.user.authorities.forEach(auth => {
         //   sessionStorage.setItem('authority',auth.authority)
         // });
-        
+        const payload = this.parseJwt(response.message);
+        // {sub: 'stan254', permissions: Array(10), iss: 'stanLey', exp: 1722780385, iat: 1722776785}
+        const permissions = payload.permissions;
+        const username = payload.sub;
+        const exp = payload.exp;
+        sessionStorage.setItem('username',username)
+        sessionStorage.setItem('exp',exp)
+        sessionStorage.setItem('authority',"ADMIN")
+        sessionStorage.setItem('authorities',permissions)
+
         let receivedToken='Bearer '+response.message;
         sessionStorage.setItem('backendToken',receivedToken);
         if (this.authservice.isUserLoggedIn()) {
@@ -66,6 +72,22 @@ export class AuthComponent implements OnInit {
   resetAuthMessage():void{
     this.authMessage!;
   }
+
+ base64UrlDecode(base64Url:any) {
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = atob(base64);
+  let result = '';
+  for (let i = 0; i < rawData.length; ++i) {
+      result += String.fromCharCode(rawData.charCodeAt(i));
+  }
+  return result;
+}
+
+parseJwt(token:any) {
+  const payloadBase64Url = token.split('.')[1];
+  const payloadDecoded = this.base64UrlDecode(payloadBase64Url);
+  return JSON.parse(payloadDecoded);
+}
  resetPassword(logins:NgForm):void {
    this.resetAuthMessage;
    this.Reset=logins.value;

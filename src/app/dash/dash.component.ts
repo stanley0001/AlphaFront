@@ -20,7 +20,11 @@ export class DashComponent implements OnInit{
 ) { }
 
 
-  public logout(){
-   this.authservice.logOut();
-  }
+public logout(){
+  this.authservice.logOut();
+ }
+ public allowed(permission:any){
+  return this.authservice.hasPermission(permission);
+ }
+ 
 }

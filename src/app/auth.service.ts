@@ -28,6 +28,15 @@ export class JwtResponse{
 
 
 export class AuthService {
+  hasPermission(requiredPermission: any) {
+    const authorities=sessionStorage.getItem('authorities');
+    if (authorities!==null && authorities.includes(requiredPermission)) {
+      return true;
+    } else {
+      return false;
+    }
+   
+  }
   private ApiUrl=environment.apiBaseUrl;
   constructor(
     private httpClient:HttpClient,

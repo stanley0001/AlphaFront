@@ -5,17 +5,23 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGurdService implements CanActivate{
-  constructor(public auth: AuthService, public router: Router) {}  canActivate(): boolean {
+  constructor(public auth: AuthService, public router: Router) {}  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
    let response:boolean;
-  if (this.auth.isUserLoggedIn()===true && sessionStorage.getItem('authority')==="ADMIN") {
-    
-    response=true;
-  }else{
-    //response=false
-    response=true
+   const requiredPermission = route.data.permission;
+   const authorities=sessionStorage.getItem('authorities');
+   console.log("authorities",authorities)
+   console.log("requiredPermission",requiredPermission)
+
+    if (authorities!==null && authorities.includes(requiredPermission)) {
+      return true;
+    } else {
+      alert("403: Not authorised");
+      return false;
+    }
+
   }
-    return response;
-  }
-  
 
 }

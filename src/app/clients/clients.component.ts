@@ -19,7 +19,7 @@ export class ClientsComponent implements OnInit {
      public clients:Client[] | undefined;
      public clientEmpty!: Client;
      public user!: User;
-     public updateClient!:Client;
+     public updateClient:Client | undefined;
      public subscribeClient!:Client;
      public products!: Product[];
   
