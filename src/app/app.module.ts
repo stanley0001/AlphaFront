@@ -124,8 +124,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule, FormsModule,
-    NgxPaginationModule
+    HttpClientModule,
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },

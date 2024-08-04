@@ -10,6 +10,7 @@ import { Product } from './products/product';
   providedIn: 'root'
 })
 export class ProductService {
+
   //get Dash Data
   getdashData() : Observable<dashData> {
     return this.http.get<dashData>(`${this.ApiUrl}/customers/dashBoardData`);
@@ -18,6 +19,10 @@ export class ProductService {
   //create a subscription
   public Subscribe(data: NgForm): Observable<any> {
     return this.http.post<any>(`${this.ApiUrl}/customers/createSubscription`,data.value);
+  }
+  //upload loanbook
+  uploadLoanBook(records: any[]): Observable<any> {
+    return this.http.post<any>(`${this.ApiUrl}/loan-book/upload`,records);
   }
   private ApiUrl=environment.apiBaseUrl;
   constructor(private http:HttpClient) { }

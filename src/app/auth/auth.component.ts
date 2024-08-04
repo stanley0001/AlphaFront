@@ -32,10 +32,14 @@ export class AuthComponent implements OnInit {
       (response:authResponse)=>{ 
         if (response.reason==="Authenticated") {
         document.getElementById('Lclosebtn')?.click();
-        sessionStorage.setItem('username',response.user.username)
-        response.user.authorities.forEach(auth => {
-          sessionStorage.setItem('authority',auth.authority)
-        });
+        
+        // sessionStorage.setItem('username',response.user.username)
+        sessionStorage.setItem('username',"admin")
+        sessionStorage.setItem('authority',"ADMIN")
+        sessionStorage.setItem('authorities',"ADMIN")
+        // response.user.authorities.forEach(auth => {
+        //   sessionStorage.setItem('authority',auth.authority)
+        // });
         
         let receivedToken='Bearer '+response.message;
         sessionStorage.setItem('backendToken',receivedToken);

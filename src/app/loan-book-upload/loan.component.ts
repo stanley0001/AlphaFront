@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientsCsvData } from './LoanCsvData';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ProductService } from '../product.service';
+import { ResponseModel } from './responseModel';
 
 @Component({
   selector: 'app-loan-book-upload',
@@ -9,9 +12,11 @@ import { ClientsCsvData } from './LoanCsvData';
 export class LoanBookComponent implements OnInit {
   public records: any[] = [];
   page = 1;
-  @ViewChild('csvReader') csvReader: any;
   jsondatadisplay:any;
-  constructor() { }
+  @ViewChild('csvReader') csvReader: any;
+  constructor(private restClient:ProductService) { 
+      
+  }
 
   ngOnInit(): void {
   }
@@ -92,5 +97,16 @@ fileReset() {
 
 getJsonData(){
   this.jsondatadisplay = JSON.stringify(this.records);
+}
+uploadLoanBook(){
+  // console.log(this.records);
+  this.restClient.uploadLoanBook(this.records).subscribe(
+    (response:ResponseModel[])=>{
+    console.log("response",response);
+   },
+    (error :HttpErrorResponse)=>{
+     alert(error.message)
+    }
+);
 }
 }

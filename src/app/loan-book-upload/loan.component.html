@@ -1,7 +1,7 @@
 <div class="card text-center">
     <div class="card-body">
-      <h4 class="card-title">Bulk Clients Upload</h4>
-      <p class="card-text">Create csv file with the following fields <b>lastName,occupation,email,phoneNumber,externalId,address,accountBalance,altPhoneNumber,documentNumber,dob,externalStartDate</b></p>
+      <h4 class="card-title">Bulk Loan Upload</h4>
+      <!-- <p class="card-text">Create csv file with the following fields <b>lastName,occupation,email,phoneNumber,externalId,address,accountBalance,altPhoneNumber,documentNumber,dob,externalStartDate</b></p> -->
       <form #fileUploadForm="ngForm" id="uploadedfileForm">
        
           <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" />
@@ -52,6 +52,3 @@
         <a href="javascript:;" *ngIf="records.length > 0" (click)="getJsonData()" class="btn btn-primary">Upload</a>
       
         <a href="javascript:;" *ngIf="records.length > 0" (click)="fileReset()" class="btn btn-primary">Reset </a>  
-  
-  </div>
-
