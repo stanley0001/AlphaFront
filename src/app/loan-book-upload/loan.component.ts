@@ -70,6 +70,7 @@ getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
       csvRecord.commencementDate = curruntRecord[10]? curruntRecord[10].trim() : '';
       csvRecord.dueDate = curruntRecord[11]? curruntRecord[11].trim() : '';
       csvRecord.productName = curruntRecord[12]? curruntRecord[12].trim() : '';
+      csvRecord.installments = curruntRecord[13]? curruntRecord[13].trim() : '';
       
       csvArr.push(csvRecord);
     }
@@ -109,8 +110,10 @@ onPageSizeChange(event: Event) {
 uploadLoanBook(){
   // console.log(this.records);
   this.restClient.uploadLoanBook(this.records).subscribe(
-    (response:ResponseModel[])=>{
-    console.log("response",response);
+    (response:ResponseModel)=>{
+    // console.log("response",response);
+     this.fileReset()
+     alert(response.message)
    },
     (error :HttpErrorResponse)=>{
      alert(error.message)

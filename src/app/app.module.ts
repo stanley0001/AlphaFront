@@ -21,6 +21,7 @@ import { ClientProfileComponent } from './client-profile/client-profile.componen
 import { BioDataComponent } from './bio-data/bio-data.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { LoanBookComponent } from './loan-book-upload/loan.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 const routes: Routes = [
   {

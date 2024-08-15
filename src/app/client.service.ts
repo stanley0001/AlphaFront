@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from './clients/client';
+import { ClientResponseModel } from './clients/clientResponse';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +24,14 @@ export class ClientService {
   }
 
   //get all clients
-  public getClients(): Observable<Client[]> {
-     return this.http.get<Client[]>(`${this.ApiUrl}/customers/findall`);
+  public getClients(page: number, itemsPerPage: number): Observable<ClientResponseModel> {
+    //  return this.http.get<Client[]>(`${this.ApiUrl}/customers/findall`);
+    return this.http.get<ClientResponseModel>(`${this.ApiUrl}/customers/all`, {
+      params: {
+        size: itemsPerPage,  
+        page: page
+      }
+    });
   }
 
   //add a client

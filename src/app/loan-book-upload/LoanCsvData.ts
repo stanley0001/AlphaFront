@@ -11,4 +11,5 @@ export class ClientsCsvData {
 public commencementDate:any;
 public dueDate:any;
 public productName:any;
+public installments:any;
 }

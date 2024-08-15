@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { Client } from './client';
@@ -8,6 +9,7 @@ import { ClientService } from '../client.service';
 import { Product } from '../products/product';
 import { ProductService } from '../product.service';
 import { UsersService } from '../users.service';
+import { ClientResponseModel } from './clientResponse';
 
 @Component({
   selector: 'app-users',
@@ -15,13 +17,18 @@ import { UsersService } from '../users.service';
   styleUrls: ['../assets/css/material-dashboard.css?v=2.1.2']
 })
 export class ClientsComponent implements OnInit {
-    title="Clients";
-     public clients:Client[] | undefined;
+     public title="Clients";
+     public page = 1;
+     public itemsPerPage = 10;
+     public totalelements = 10;
+     public pageSizes = [5, 10, 20, 50, 100,"ALL"];
+     public clients:Client[] =[];
      public clientEmpty!: Client;
      public user!: User;
      public updateClient:Client | undefined;
      public subscribeClient!:Client;
      public products!: Product[];
+     
   
     constructor(private clientService:ClientService,private userService:UsersService,private productService:ProductService,private router:Router) { }
   
@@ -30,15 +37,29 @@ export class ClientsComponent implements OnInit {
     }
   
     public getClients():void{
-      this.clientService.getClients().subscribe(
-          (response:Client[])=>{
-           this.clients=response;
+      this.clientService.getClients(this.page,this.itemsPerPage).subscribe(
+          (response:ClientResponseModel)=>{
+           this.clients=response.body;
+           this.totalelements=response.totalElements;
+          //  this.to=response.totalElements;
+          //  this.totalelements=response.totalElements;           
           },
           (error :HttpErrorResponse)=>{
            alert(error.message);
            
           }
       ); 
+    }
+    onPageChange(page: number) {
+      this.page = page;
+      this.getClients();
+    }
+    onPageSizeChange(event: Event) {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+    
+      console.log("selected page size ",selectedValue)
+      this.itemsPerPage = Number.parseInt(selectedValue); 
+      this.getClients()
     }
     public getProducts():void{
       this.productService.getProducts().subscribe(

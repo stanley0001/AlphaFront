@@ -110,7 +110,7 @@
                                     {{subscription.creditLimit }}
                                   </td>
                                   <td class="td-number">
-                                    {{subscription.status }} 
+                                    {{ subscription.status ? 'ACTIVE' : 'INACTIVE' }}
                                   </td>
                                   <td class="td-number">
                                     {{subscription.createdAt }}

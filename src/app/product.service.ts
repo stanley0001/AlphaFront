@@ -22,7 +22,7 @@ export class ProductService {
   }
   //upload loanbook
   uploadLoanBook(records: any[]): Observable<any> {
-    return this.http.post<any>(`${this.ApiUrl}/loan-book/upload`,records);
+    return this.http.post<any>(`${this.ApiUrl}/loan-actions/upload`,records);
   }
   private ApiUrl=environment.apiBaseUrl;
   constructor(private http:HttpClient) { }
