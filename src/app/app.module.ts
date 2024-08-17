@@ -1,5 +1,5 @@
 import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -118,34 +118,28 @@ const routes: Routes = [
     component: AuthComponent
   },
 ];
-@NgModule({
-  declarations: [
-    AppComponent,
-    ClientsComponent,
-    UsersComponent,
-    DashComponent,
-    AuthComponent,
-    BpsComponent,
-    ProductsComponent,
-    ReportsComponent,
-    CommunicationComponent,
-    NotfoundComponent,
-    ClientProfileComponent,
-    BioDataComponent,
-    TransactionsComponent,
-    LoanBookComponent
-  ],
-  imports: [
-    RouterModule.forRoot(routes),
-    BrowserModule,
-    HttpClientModule,
-    NgxPaginationModule,
-    FormsModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ClientsComponent,
+        UsersComponent,
+        DashComponent,
+        AuthComponent,
+        BpsComponent,
+        ProductsComponent,
+        ReportsComponent,
+        CommunicationComponent,
+        NotfoundComponent,
+        ClientProfileComponent,
+        BioDataComponent,
+        TransactionsComponent,
+        LoanBookComponent
+    ],
+    bootstrap: [AppComponent], imports: [RouterModule.forRoot(routes),
+        BrowserModule,
+        NgxPaginationModule,
+        FormsModule], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule { }
 
