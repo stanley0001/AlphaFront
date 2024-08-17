@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "alphaFront2:build:production"
+              "buildTarget": "alphaFront2:build:production"
             },
             "development": {
-              "browserTarget": "alphaFront2:build:development"
+              "buildTarget": "alphaFront2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "alphaFront2:build"
+            "buildTarget": "alphaFront2:build"
           }
         },
         "test": {
