@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { Client } from './client';
@@ -10,6 +9,9 @@ import { Product } from '../products/product';
 import { ProductService } from '../product.service';
 import { UsersService } from '../users.service';
 import { ClientResponseModel } from './clientResponse';
+import { PageEvent } from '@angular/material/paginator';
+import { from } from 'rxjs';
+
 
 @Component({
   selector: 'app-users',
@@ -21,7 +23,7 @@ export class ClientsComponent implements OnInit {
      public page = 1;
      public itemsPerPage = 10;
      public totalelements = 10;
-     public pageSizes = [5, 10, 20, 50, 100,"ALL"];
+     public pageSizes = [5, 10, 20, 50, 100];
      public clients:Client[] =[];
      public clientEmpty!: Client;
      public user!: User;
@@ -37,7 +39,7 @@ export class ClientsComponent implements OnInit {
     }
   
     public getClients():void{
-      this.clientService.getClients(this.page,this.itemsPerPage).subscribe(
+      this.clientService.getClients(this.page-1,this.itemsPerPage).subscribe(
           (response:ClientResponseModel)=>{
            this.clients=response.body;
            this.totalelements=response.totalElements;
@@ -50,11 +52,17 @@ export class ClientsComponent implements OnInit {
           }
       ); 
     }
+
     onPageChange(page: number) {
       this.page = page;
-      this.getClients();
-    }
+       this.getClients();
+     }
+     onItemsPerPageChange(item: number) {
+      this.itemsPerPage = item;
+       this.getClients();
+     }
     onPageSizeChange(event: Event) {
+      // console.log("event",event)
       const selectedValue = (event.target as HTMLSelectElement).value;
     
       console.log("selected page size ",selectedValue)

@@ -21,7 +21,12 @@ import { ClientProfileComponent } from './client-profile/client-profile.componen
 import { BioDataComponent } from './bio-data/bio-data.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { LoanBookComponent } from './loan-book-upload/loan.component';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { PaginationComponent } from './pagination/pagination.component';
+import { CommonModule } from '@angular/common';
+
 
 const routes: Routes = [
   {
@@ -132,11 +137,16 @@ const routes: Routes = [
         ClientProfileComponent,
         BioDataComponent,
         TransactionsComponent,
+        PaginationComponent,
         LoanBookComponent
     ],
     bootstrap: [AppComponent], imports: [RouterModule.forRoot(routes),
         BrowserModule,
         NgxPaginationModule,
+        MatPaginatorModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        CommonModule,
         FormsModule], providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),

@@ -85,9 +85,9 @@
             </thead>
             <tbody>
               <div *ngIf="clients==null"><div class="loader"></div></div>
-              <tr *ngFor="let client of clients | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+              <!-- <tr *ngFor="let client of clients | paginate: { itemsPerPage: itemsPerPage, currentPage: page }"> -->
 
-                <!-- <tr *ngFor="let client of clients"> -->
+                <tr *ngFor="let client of clients">
                     <td>{{client.firstName}} {{client.lastName}}</td>
                     <td>{{client.phoneNumber}}</td>
                     <td>{{client.email}}</td>
@@ -102,22 +102,19 @@
                     </td>
                 </tr>
             </tbody>
-            <div>
-              <label for="pageSize">Items per page:</label>
-              <select id="pageSize" [(ngModel)]="itemsPerPage" (change)="onPageSizeChange($event)">
-                <option *ngFor="let size of pageSizes" [value]="size">{{size}}</option>
-              </select>
-            </div>
+           
+            <app-pagination
+            [totalItems]="totalelements"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="page"
+            (pageChange)="onPageChange($event)"
+            (itemsPerPageChange)="onItemsPerPageChange($event)"></app-pagination>
           </table>
-          <pagination-controls 
-          (pageChange)="onPageChange($event)"
-          totalelements="totalelements" 
-        ></pagination-controls>
-        
+
           </div>
 
   </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  
+   -->

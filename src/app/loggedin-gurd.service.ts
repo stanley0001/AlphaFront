@@ -11,6 +11,7 @@ export class LoggedInGuardService implements CanActivate{
       this.router.navigate(['admin/dash']);
       return false;
     }
+    // this.router.navigate(['auth']);
     return true;
   }
 

@@ -10,7 +10,7 @@ import { ResponseModel } from './ResponseModel';
 @Component({
   selector: 'app-root',
   templateUrl: './auth.component.html',
-  styleUrls: ['../assets/css/material-dashboard.css?v=2.1.2']
+  styleUrls: ['../assets/css/auth.css']
 })
 export class AuthComponent implements OnInit {
   model: any = {};
@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.openForm('login')
+    // this.openForm('login')
   }
 
   login(logins:NgForm):void {
@@ -31,7 +31,7 @@ export class AuthComponent implements OnInit {
     this.authservice.authenticate(logins.value).subscribe(
       (response:authResponse)=>{ 
         if (response.reason==="Authenticated") {
-        document.getElementById('Lclosebtn')?.click();
+        // document.getElementById('Lclosebtn')?.click();
         
         // sessionStorage.setItem('username',response.user.username)
         // response.user.authorities.forEach(auth => {
@@ -56,13 +56,18 @@ export class AuthComponent implements OnInit {
         }
       }else{
         this.authMessage=response.reason;
+        if(response.reason==undefined)
+          this.authMessage="Server Error, Contact Administrator";
       }
       },
       (error:HttpErrorResponse)=>{
         if (error.status===401) {
           this.authMessage="Wrong PassWord!";
         }else{
-        alert(error.error.error)
+          this.authMessage=error.error.error;
+          if(error.error.error==undefined)
+            this.authMessage="Server Error, Contact Administrator";
+        // alert(error.error.error)
         }
       }
     );

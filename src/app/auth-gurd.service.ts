@@ -11,17 +11,17 @@ export class AuthGurdService implements CanActivate{
   ): boolean {
    let response:boolean;
    const requiredPermission = route.data.permission;
-   const authorities=sessionStorage.getItem('authorities');
-   console.log("authorities",authorities)
-   console.log("requiredPermission",requiredPermission)
-
-    if (authorities!==null && authorities.includes(requiredPermission)) {
-      return true;
+    if (this.auth.isUserLoggedIn()) {
+       if(this.auth.hasPermission(requiredPermission)){
+        return true;
+       }
+       alert("403: Not authorised to access resource");
+       return false;
     } else {
-      alert("403: Not authorised");
+      alert("401: Not authenticated");
+      this.router.navigate(['auth']);
       return false;
     }
-
   }
 
 }
